@@ -1,0 +1,31 @@
+<div class="card">
+  <img
+    src="https://sitis.com.co/wp-content/uploads/2019/11/Logositis-03.png"
+    alt=""
+  />
+  <h2>Iniciar Sesión</h2>
+  <form
+    class="card-form"
+    [formGroup]="loginForm"
+    (ngSubmit)="onLogin(loginForm)"
+  >
+    <span class="p-float-label">
+      <input pInputText id="username" formControlName="username" />
+      <label htmlFor="username">Username</label>
+    </span>
+
+    <span class="p-float-label">
+      <p-password [feedback]="false" formControlName="password"></p-password>
+      <label for="password">Password</label>
+    </span>
+
+    <button
+      pButton
+      pRipple
+      label="Ingresar"
+      iconPos="right"
+      icon="pi pi-angle-right"
+    ></button>
+  </form>
+  <small>Olvidaste tu contrasena?</small>
+</div>
