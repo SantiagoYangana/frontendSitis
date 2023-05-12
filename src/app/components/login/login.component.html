@@ -4,18 +4,19 @@
     alt=""
   />
   <h2>Iniciar Sesión</h2>
-  <form
-    class="card-form"
-    [formGroup]="loginForm"
-    (ngSubmit)="onLogin(loginForm)"
-  >
+  <form class="card-form" [formGroup]="loginForm">
     <span class="p-float-label">
-      <input pInputText id="username" formControlName="username" />
+      <input pInputText id="username" type="text" formControlName="username" />
       <label htmlFor="username">Username</label>
     </span>
 
     <span class="p-float-label">
-      <p-password [feedback]="false" formControlName="password"></p-password>
+      <input
+        pInputText
+        id="password"
+        type="password"
+        formControlName="password"
+      />
       <label for="password">Password</label>
     </span>
 
@@ -25,6 +26,7 @@
       label="Ingresar"
       iconPos="right"
       icon="pi pi-angle-right"
+      (click)="onLogin()"
     ></button>
   </form>
   <small>Olvidaste tu contrasena?</small>

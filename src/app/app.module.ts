@@ -9,6 +9,7 @@ import { ListUserComponent } from './components/list-user/list-user.component';
 import { CreateUserComponent } from './components/create-user/create-user.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {HttpClientModule} from '@angular/common/http';
 
 //PrimeNG
 import { ButtonModule } from 'primeng/button';
@@ -30,7 +31,8 @@ import { PasswordModule } from 'primeng/password';
     InputTextModule,
     PasswordModule,
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]
