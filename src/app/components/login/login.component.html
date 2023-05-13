@@ -29,5 +29,5 @@
       (click)="onLogin()"
     ></button>
   </form>
-  <small>Olvidaste tu contrasena?</small>
+  <small *ngIf="errorStatus">{{ errorMsj }}</small>
 </div>
