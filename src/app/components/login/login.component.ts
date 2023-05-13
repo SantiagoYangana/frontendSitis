@@ -49,4 +49,14 @@ export class LoginComponent {
     }
   }
 
+  ngOnInit(): void {
+    this.checkLocalStorage();
+  }
+
+  checkLocalStorage(){
+    if(localStorage.getItem('token')){
+      this.router.navigate(['/home']);
+    }
+  }
+
 }

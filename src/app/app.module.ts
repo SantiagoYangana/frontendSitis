@@ -16,6 +16,10 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { HomeComponent } from './components/home/home.component';
+import { HeaderComponent } from './templates/header/header.component';
+import { FooterComponent } from './templates/footer/footer.component';
+import { PanelModule } from 'primeng/panel';
+import { TabViewModule } from 'primeng/tabview';
 
 @NgModule({
   declarations: [
@@ -23,7 +27,9 @@ import { HomeComponent } from './components/home/home.component';
     LoginComponent,
     ListUserComponent,
     CreateUserComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
@@ -34,7 +40,9 @@ import { HomeComponent } from './components/home/home.component';
     PasswordModule,
     FormsModule, 
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    PanelModule,
+    TabViewModule
   ],
   providers: [],
   bootstrap: [AppComponent]
