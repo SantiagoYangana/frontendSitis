@@ -1,6 +1,15 @@
-<p-panel header="SITIS">
-  <p-tabView>
-    <p-tabPanel header="Listar"> </p-tabPanel>
-    <p-tabPanel header="Crear"> </p-tabPanel>
-  </p-tabView>
-</p-panel>
+<nav>
+  <div>
+    <img
+      src="https://sitis.com.co/wp-content/uploads/2019/11/Logositis-03.png"
+      alt=""
+    />
+  </div>
+
+  <ul>
+    <li><a routerLink="/listUser">Home</a></li>
+    <li><a href="">Listar Usuario</a></li>
+    <li><a href="">Crear Usuario</a></li>
+  </ul>
+</nav>
+<router-outlet></router-outlet>
