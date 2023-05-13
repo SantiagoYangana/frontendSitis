@@ -20,6 +20,9 @@ import { HeaderComponent } from './templates/header/header.component';
 import { FooterComponent } from './templates/footer/footer.component';
 import { PanelModule } from 'primeng/panel';
 import { TabViewModule } from 'primeng/tabview';
+import { TableModule } from 'primeng/table';
+import { ProfileComponent } from './components/profile/profile.component';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -29,7 +32,8 @@ import { TabViewModule } from 'primeng/tabview';
     CreateUserComponent,
     HomeComponent,
     HeaderComponent,
-    FooterComponent
+    FooterComponent,
+    ProfileComponent
   ],
   imports: [
     BrowserModule,
@@ -42,7 +46,9 @@ import { TabViewModule } from 'primeng/tabview';
     ReactiveFormsModule,
     HttpClientModule,
     PanelModule,
-    TabViewModule
+    TabViewModule,
+    TableModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]
