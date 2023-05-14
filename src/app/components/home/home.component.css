@@ -7,3 +7,24 @@
   justify-content: center;
   gap: 0.5rem;
 }
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+.dropdown-select {
+  display: flex;
+  gap: 1rem;
+  cursor: pointer;
+  background: #ffffff;
+  border: 1px solid #ced4da;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s,
+    box-shadow 0.2s;
+  border-radius: 6px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto;
+  font-size: 1rem;
+  font-weight: normal;
+}
+.dropdown-select:hover {
+  background-color: #f8f9fa;
+  border-color: #4390d4;
+}

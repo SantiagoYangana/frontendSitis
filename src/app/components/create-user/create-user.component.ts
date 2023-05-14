@@ -29,9 +29,8 @@ export class CreateUserComponent {
   }
 
   ngOnInit(): void {
-    this.api.getProfiles().subscribe(data => {
-      this.profiles = data;
-    });
+    this.getProfiles();
+    this.getUsers();
   }
 
   getProfiles(){
@@ -40,49 +39,29 @@ export class CreateUserComponent {
     });
   }
 
-  comprobarUsername(){
-    const username = this.formUser.get('username')?.value;
-    console.log(username)
+  getUsers(){
     this.api.getUsers().subscribe(data => {
       this.usersVerified = data;
-    });
-
-    this.usersVerified.map(user => {
-      if(user.username === username){
-        this.verifiedUsername = true;
-      }else{
-        this.verifiedUsername = false;
-      }
     });
   }
 
   createUser(form:ListUser){
     const username = this.formUser.get('username')?.value;
     console.log(username)
-    this.api.getUsers().subscribe(data => {
-      this.usersVerified = data;
-      this.usersVerified.map(user => {
-        if(user.username === username){
-          this.verifiedUsername = true;
-        }else{
-          this.verifiedUsername = false;
-        }
-      });
-    });
     
-    console.log(form)
-    // if(this.formUser.valid){
-    //   let user:ListUser;
-      
-    // }else{
-    //   console.log('Formulario invalido');
-    // }
+    if(this.usersVerified.find(user => user.username == username)){
+      this.verifiedUsername = true;
+    }
+    
     if(this.formUser.valid && !this.verifiedUsername){
       this.api.createUser(form).subscribe(data => {
         console.log(data);
+        this.router.navigate(['/home']);
+        this.formUser.reset();
       });
     }else{
       console.log('Formulario invalido o Usario ya existe');
+      this.verifiedUsername = false;
     }
   }
 
@@ -99,8 +78,5 @@ export class CreateUserComponent {
   salir(){
     this.router.navigate(['/home']);
   }
-
-  
-
 
 }

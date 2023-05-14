@@ -33,4 +33,9 @@ export class ApiService {
     let direction = `${this.apiURL}/newUser`;
     return this.http.post<ListUser>(direction,user);
   }
+
+  getFilteredUsers(profile:string):Observable<ListUser[]>{
+    let direction = `${this.apiURL}/findUser/${profile}`;
+    return this.http.get<ListUser[]>(direction);
+  }
 }
