@@ -6,10 +6,13 @@
     />
   </div>
 
-  <ul>
-    <li><a routerLink="/listUser">Home</a></li>
-    <li><a href="">Listar Usuario</a></li>
-    <li><a href="">Crear Usuario</a></li>
-  </ul>
+  <div class="right-nav">
+    <p>Bienvenido, {{ user }}</p>
+    <p-button
+      icon="pi pi-sign-out"
+      styleClass="p-button-rounded p-button-secondary p-button-text"
+      (click)="logout()"
+    ></p-button>
+  </div>
 </nav>
 <router-outlet></router-outlet>

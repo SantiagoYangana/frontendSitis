@@ -41,7 +41,10 @@ export class LoginComponent {
       this.api.authorize(this.login).subscribe(data => {
         let result:Auth = data;
         if(result.status=="OK"){
-          localStorage.setItem('token', result.response.toString());
+          let resp = result.response.split(",");
+          let username = resp[1];
+          localStorage.setItem('token', resp[0]);
+          localStorage.setItem('username', username);
           this.router.navigate(['/home']);
         }else{
           this.errorStatus = true;

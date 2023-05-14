@@ -15,6 +15,14 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
+  getCurrentUsername(){
+    return localStorage.getItem('username');
+  }
+
+  getCurrentToken(){
+    return localStorage.getItem('token');
+  }
+
   authorize(form:Login):Observable<Auth>{
     let direction = `${this.apiURL}/auth`;
     return this.http.post<Auth>(direction, form);
