@@ -18,16 +18,15 @@
       [options]="profiles"
       optionLabel="name"
     ></p-dropdown> -->
-    <select class="dropdown-select" [(ngModel)]="profileSelected">
+    <select
+      class="dropdown-select"
+      [(ngModel)]="profileSelected"
+      (change)="handleFilter()"
+    >
       <option *ngFor="let profile of profiles">
         {{ profile.name }}
       </option>
     </select>
-    <p-button
-      icon="pi pi-filter"
-      styleClass="p-button-rounded p-button-info"
-      (click)="handleFilter()"
-    ></p-button>
     <p-button
       icon="pi pi-refresh"
       styleClass="p-button-rounded p-button-info"
