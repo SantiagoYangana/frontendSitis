@@ -23,17 +23,13 @@
       [(ngModel)]="profileSelected"
       (change)="handleFilter()"
     >
+      <option value="Todos">Todos</option>
       <option *ngFor="let profile of profiles">
         {{ profile.name }}
       </option>
     </select>
-    <p-button
-      icon="pi pi-refresh"
-      styleClass="p-button-rounded p-button-info"
-      (click)="handleReset()"
-    ></p-button>
   </div>
-
+  <h4 *ngIf="showNullText">No hay datos para este perfil</h4>
   <p-table [value]="filteredUsers" [tableStyle]="{ 'min-width': '50rem' }">
     <ng-template pTemplate="header">
       <tr>
@@ -48,6 +44,33 @@
         <td>{{ user.email }}</td>
         <td>{{ user.profile.name }}</td>
       </tr>
+    </ng-template>
+    <ng-template pTemplate="summary">
+      <div
+        style="
+          display: flex;
+          flex-direction: row;
+          justify-content: center;
+          align-items: center;
+          gap: 1rem;
+        "
+      >
+        <p-button
+          icon="pi pi-angle-left"
+          styleClass="p-button-rounded p-button-text"
+          (click)="prevPage()"
+        ></p-button>
+        <span *ngFor="let page of totalPages; let i = index"
+          ><a class="pageSelect" style="cursor: pointer" (click)="setPage(i)">{{
+            i + 1
+          }}</a></span
+        >
+        <p-button
+          icon="pi pi-angle-right"
+          styleClass="p-button-rounded p-button-text"
+          (click)="nextPage()"
+        ></p-button>
+      </div>
     </ng-template>
   </p-table>
 </div>

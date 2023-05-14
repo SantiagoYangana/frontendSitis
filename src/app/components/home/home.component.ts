@@ -12,16 +12,23 @@ import { ProfileUser } from 'src/app/models/profileUser.interface';
 export class HomeComponent {
 
   btnCrear:boolean=false;
+  page:number=0;
+  size:number=5;
+  isfirst:boolean = false;
+  isLast: boolean = false;
+  totalPages:Array<number>=[];
 
   users: ListUser[] = [];
   profiles: ProfileUser[] = [];
   filteredUsers: ListUser[] = [];
   profileSelected:string='administrador';
+  showNullText:boolean=false;
 
   constructor( private api: ApiService, private router:Router) { }
 
   ngOnInit(): void {
-    this.getUsers();
+    //this.getUsers();
+    this.chargePaginationUsers();
     this.getProfiles();
 
     if(localStorage.getItem('token')===true.toString()){
@@ -29,6 +36,16 @@ export class HomeComponent {
     }else{
       console.log('Si hay')
     }
+  }
+
+  chargePaginationUsers(){
+    this.api.getPaginationUsers(this.page, this.size).subscribe(data => {
+      this.users = data.content;
+      this.isfirst = data.first;
+      this.isLast = data.last;
+      this.totalPages = new Array(data['totalPages']);
+      this.filteredUsers = this.users;
+    });
   }
 
   getUsers(){
@@ -49,13 +66,32 @@ export class HomeComponent {
   }
 
   handleFilter(){
-    this.filteredUsers=this.users.filter(user => user?.profile?.name==this.profileSelected)
+    if(this.profileSelected!='Todos'){
+      this.filteredUsers=this.users.filter(user => user?.profile?.name==this.profileSelected);
+      console.log(this.filteredUsers);
+      this.filteredUsers.length==0?this.showNullText=true:this.showNullText=false;
+    }else{
+      this.filteredUsers=this.users;
+      this.showNullText=false;
+    }
+  }  
+
+  prevPage(){
+    if(!this.isfirst){
+      this.page--;
+      this.chargePaginationUsers();
+    }
   }
 
-  handleReset(){
-    this.filteredUsers=this.users;
-    this.profileSelected='administrador';
+  nextPage(){
+    if(!this.isLast){
+      this.page++;
+      this.chargePaginationUsers();
+    }
   }
-  
 
+  setPage(page:number){
+    this.page=page;
+    this.chargePaginationUsers();
+  }
 }

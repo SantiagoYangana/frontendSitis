@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  height: 80vh;
 }
 .actions {
   display: flex;
@@ -27,4 +28,16 @@
 .dropdown-select:hover {
   background-color: #f8f9fa;
   border-color: #4390d4;
+}
+
+.container h4 {
+  color: crimson;
+}
+
+.pageSelect:hover {
+  font-weight: 300;
+}
+.pageSelect:hover {
+  color: #4390d4;
+  font-weight: 700;
 }
