@@ -4,6 +4,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { Login } from '../../models/login.interface';
 
 import { Router } from '@angular/router';
+import { Auth } from 'src/app/models/auth.interface';
 
 
 @Component({
@@ -36,14 +37,15 @@ export class LoginComponent {
     if(this.loginForm.valid){
       this.login.username = this.loginForm.value.username;
       this.login.password = this.loginForm.value.password;
+      console.log(this.loginForm.value);
       this.api.authorize(this.login).subscribe(data => {
-        let result = data;
-        if(result){
-          localStorage.setItem('token', result.toString());
+        let result:Auth = data;
+        if(result.status=="OK"){
+          localStorage.setItem('token', result.response.toString());
           this.router.navigate(['/home']);
         }else{
           this.errorStatus = true;
-          this.errorMsj = "Usuario o contraseña incorrectos";
+          this.errorMsj =result.status;
         }
     });
     }

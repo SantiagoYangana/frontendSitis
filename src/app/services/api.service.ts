@@ -4,6 +4,7 @@ import {HttpClient, HttpHeaders} from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ListUser } from '../models/listUser.interface';
 import { ProfileUser } from '../models/profileUser.interface';
+import { Auth } from '../models/auth.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -14,9 +15,9 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  authorize(form:Login):Observable<boolean>{
+  authorize(form:Login):Observable<Auth>{
     let direction = `${this.apiURL}/auth`;
-    return this.http.post<boolean>(direction, form);
+    return this.http.post<Auth>(direction, form);
   }
 
   getUsers():Observable<ListUser[]>{
