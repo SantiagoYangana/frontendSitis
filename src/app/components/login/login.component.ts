@@ -37,7 +37,6 @@ export class LoginComponent {
     if(this.loginForm.valid){
       this.login.username = this.loginForm.value.username;
       this.login.password = this.loginForm.value.password;
-      console.log(this.loginForm.value);
       this.api.authorize(this.login).subscribe(data => {
         let result:Auth = data;
         if(result.status=="OK"){

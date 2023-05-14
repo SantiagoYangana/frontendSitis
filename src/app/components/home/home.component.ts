@@ -27,14 +27,15 @@ export class HomeComponent {
   constructor( private api: ApiService, private router:Router) { }
 
   ngOnInit(): void {
-    //this.getUsers();
     this.chargePaginationUsers();
     this.getProfiles();
+    this.goToCrearValidation();
+  }
 
-    if(localStorage.getItem('token')===true.toString()){
+  goToCrearValidation(){
+    const token =this.api.getCurrentToken();
+    if (token=="administrador") {
       this.btnCrear=true;
-    }else{
-      console.log('Si hay')
     }
   }
 
@@ -68,7 +69,6 @@ export class HomeComponent {
   handleFilter(){
     if(this.profileSelected!='Todos'){
       this.filteredUsers=this.users.filter(user => user?.profile?.name==this.profileSelected);
-      console.log(this.filteredUsers);
       this.filteredUsers.length==0?this.showNullText=true:this.showNullText=false;
     }else{
       this.filteredUsers=this.users;
