@@ -14,6 +14,7 @@ export class CreateUserComponent {
   formUser: FormGroup;
   profiles: ProfileUser[] = [];
   verifiedUsername:boolean=false;
+  verfifiedPassword:boolean=false;
   usersVerified:ListUser[]=[];
 
   validarRegex=/^(?=.*[A-Z])(?=.*[0-9]).+$/;
@@ -46,22 +47,35 @@ export class CreateUserComponent {
   }
 
   createUser(form:ListUser){
+    //Verificacion Username no repetido desde el front
     const username = this.formUser.get('username')?.value;
     console.log(username)
     
     if(this.usersVerified.find(user => user.username == username)){
       this.verifiedUsername = true;
     }
+    //Verificacion Password iguales
+    const password = this.formUser.get('password')?.value;
+    const confirmPassword = this.formUser.get('passwordConfirm')?.value;
+    if(password === confirmPassword){
+      this.verfifiedPassword= true;
+    }else{
+      this.verfifiedPassword=false;
+    }
+
+    console.log(password, confirmPassword)
+
     
-    if(this.formUser.valid && !this.verifiedUsername){
+    if(this.formUser.valid && !this.verifiedUsername && this.verfifiedPassword){
       this.api.createUser(form).subscribe(data => {
         console.log(data);
         this.router.navigate(['/home']);
         this.formUser.reset();
       });
     }else{
-      console.log('Formulario invalido o Usario ya existe');
+      console.log('Formulario invalido o Usario ya existe o Contrasena no coincide');
       this.verifiedUsername = false;
+      this.verfifiedPassword = false;
     }
   }
 
