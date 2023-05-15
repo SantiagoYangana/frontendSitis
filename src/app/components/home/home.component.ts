@@ -3,6 +3,7 @@ import { ApiService } from 'src/app/services/api.service';
 import { ListUser } from '../../models/listUser.interface';
 import { Router } from '@angular/router';
 import { ProfileUser } from 'src/app/models/profileUser.interface';
+import { AlertaService } from 'src/app/services/alerta.service';
 
 @Component({
   selector: 'app-home',
@@ -24,7 +25,7 @@ export class HomeComponent {
   profileSelected:string='administrador';
   showNullText:boolean=false;
 
-  constructor( private api: ApiService, private router:Router) { }
+  constructor( private api: ApiService, private router:Router, private alerta:AlertaService) { }
 
   ngOnInit(): void {
     this.chargePaginationUsers();
@@ -69,7 +70,8 @@ export class HomeComponent {
   handleFilter(){
     if(this.profileSelected!='Todos'){
       this.filteredUsers=this.users.filter(user => user?.profile?.name==this.profileSelected);
-      this.filteredUsers.length==0?this.showNullText=true:this.showNullText=false;
+      // this.filteredUsers.length==0?this.showNullText=true:this.showNullText=false;
+      this.filteredUsers.length==0?this.alerta.showInfo('No se encontraron usuarios con ese perfil', 'Listado'):'';
     }else{
       this.filteredUsers=this.users;
       this.showNullText=false;

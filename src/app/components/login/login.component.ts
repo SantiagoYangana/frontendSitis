@@ -48,7 +48,6 @@ export class LoginComponent {
           this.alerta.showSuccess("Bienvenido "+username, "Login Correcto");
           this.router.navigate(['/home']);
         }else{
-          this.errorStatus = true;
           this.errorMsj =result.status;
           this.alerta.showError(this.errorMsj.toString(), "Login Incorrecto");
         }

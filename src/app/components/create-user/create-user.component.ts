@@ -15,6 +15,7 @@ export class CreateUserComponent {
   formUser: FormGroup;
   profiles: ProfileUser[] = [];
   verifiedUsername:boolean=false;
+  verifiedEmail:boolean=false;
   verfifiedPassword:boolean=false;
   usersVerified:ListUser[]=[];
 
@@ -50,13 +51,21 @@ export class CreateUserComponent {
   createUser(form:ListUser){
     this.verifiedUsername = false;
     this.verfifiedPassword = false;
+    this.verifiedEmail = false;
     //Verificacion Username no repetido desde el front
     const username = this.formUser.get('username')?.value;
-    console.log(username)
     
     if(this.usersVerified.find(user => user.username == username)){
       this.verifiedUsername = true;
     }
+
+    //Verificacion email no repetido desde el front
+    const email = this.formUser.get('email')?.value;
+    
+    if(this.usersVerified.find(user => user.email == email)){
+      this.verifiedEmail = true;
+    }
+
     //Verificacion Password iguales
     const password = this.formUser.get('password')?.value;
     const confirmPassword = this.formUser.get('passwordConfirm')?.value;
@@ -66,6 +75,8 @@ export class CreateUserComponent {
     if(!this.formUser.valid) return this.alerta.showError("Error, digite correctamente los campos", "Creacion Incorrecta");
 
     if(this.verifiedUsername) return this.alerta.showError("Error, el usuario ya existe", "Error Username");
+
+    if(this.verifiedEmail) return this.alerta.showError("Error, Email ya existe", "Error Email");
 
     if(!this.verfifiedPassword) return this.alerta.showError("Error, las contrasenas no coinciden", "Error Password");
 
@@ -79,6 +90,7 @@ export class CreateUserComponent {
 
   salir(){
     this.router.navigate(['/home']);
+    this.formUser.reset();
   }
 
 }
