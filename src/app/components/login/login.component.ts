@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { ApiService } from 'src/app/services/api.service';
+import { AlertaService } from 'src/app/services/alerta.service';
 import { Login } from '../../models/login.interface';
 
 import { Router } from '@angular/router';
@@ -24,7 +25,7 @@ export class LoginComponent {
   //   password: new FormControl('', Validators.required)
   // });
 
-  constructor(private api: ApiService, private fb: FormBuilder, private router: Router) { 
+  constructor(private api: ApiService, private fb: FormBuilder, private router: Router, private alerta: AlertaService) { 
     this.login = new Login();
     this.loginForm = this.fb.group({
       username: ['', Validators.required],
@@ -44,12 +45,16 @@ export class LoginComponent {
           let username = resp[1];
           localStorage.setItem('token', resp[0]);
           localStorage.setItem('username', username);
+          this.alerta.showSuccess("Bienvenido "+username, "Login Correcto");
           this.router.navigate(['/home']);
         }else{
           this.errorStatus = true;
           this.errorMsj =result.status;
+          this.alerta.showError("Error en el login", "Login Incorrecto");
         }
     });
+    }else{
+      this.alerta.showError("Error, verifique los campos", "Autenticacion Incorrecta");
     }
   }
 

@@ -9,6 +9,8 @@ import { CreateUserComponent } from './components/create-user/create-user.compon
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {HttpClientModule} from '@angular/common/http';
+import { ToastrModule } from 'ngx-toastr';
+
 
 //PrimeNG
 import { ButtonModule } from 'primeng/button';
@@ -37,6 +39,7 @@ import { PaginatorModule } from 'primeng/paginator';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    ToastrModule.forRoot(),
     AppRoutingModule,
     ButtonModule,
     InputTextModule,
