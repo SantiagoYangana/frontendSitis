@@ -6,7 +6,14 @@
       <span class="p-inputgroup-addon">
         <i class="pi pi-user"></i>
       </span>
-      <input pInputText placeholder="Username" formControlName="username" />
+      <input
+        pInputText
+        placeholder="Username"
+        formControlName="username"
+        class="input-user"
+        pTooltip="Al menos 4 caracteres"
+        tooltipEvent="focus"
+      />
     </div>
     <div class="p-inputgroup mb-2">
       <span class="p-inputgroup-addon">
@@ -28,6 +35,8 @@
         type="password"
         placeholder="Contrasena"
         formControlName="password"
+        pTooltip="1 Mayus, 1 numero y minimo 8 caracteres"
+        tooltipEvent="focus"
       />
     </div>
     <div class="p-inputgroup mb-2">

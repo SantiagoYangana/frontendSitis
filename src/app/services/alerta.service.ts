@@ -15,4 +15,8 @@ export class AlertaService {
   showError(message:string, title:string){
     this.toast.error(message, title);
   }
+
+  showInfo(message:string, title:string){
+    this.toast.info(message, title);
+  }
 }

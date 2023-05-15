@@ -25,6 +25,7 @@ import { TableModule } from 'primeng/table';
 import { ProfileComponent } from './components/profile/profile.component';
 import { DropdownModule } from 'primeng/dropdown';
 import { PaginatorModule } from 'primeng/paginator';
+import { TooltipModule } from 'primeng/tooltip';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,8 @@ import { PaginatorModule } from 'primeng/paginator';
     TabViewModule,
     TableModule,
     PaginatorModule,
-    DropdownModule
+    DropdownModule,
+    TooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

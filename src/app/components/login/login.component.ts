@@ -50,7 +50,7 @@ export class LoginComponent {
         }else{
           this.errorStatus = true;
           this.errorMsj =result.status;
-          this.alerta.showError("Error en el login", "Login Incorrecto");
+          this.alerta.showError(this.errorMsj.toString(), "Login Incorrecto");
         }
     });
     }else{

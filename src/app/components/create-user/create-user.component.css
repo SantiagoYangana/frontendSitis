@@ -6,6 +6,7 @@
   align-items: center;
   justify-content: center;
   gap: 0.5rem;
+  height: 80vh;
 }
 .container-form {
   width: 100%;

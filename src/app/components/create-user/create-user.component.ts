@@ -4,6 +4,7 @@ import { ProfileUser } from 'src/app/models/profileUser.interface';
 import { ApiService } from 'src/app/services/api.service';
 import { ListUser } from 'src/app/models/listUser.interface';
 import { Router } from '@angular/router';
+import { AlertaService } from 'src/app/services/alerta.service';
 
 @Component({
   selector: 'app-create-user',
@@ -19,7 +20,7 @@ export class CreateUserComponent {
 
   validarRegex=/^(?=.*[A-Z])(?=.*[0-9]).+$/;
 
-  constructor(private fb: FormBuilder, private api: ApiService, private router:Router) {
+  constructor(private fb: FormBuilder, private api: ApiService, private router:Router, private alerta: AlertaService) {
     this.formUser = this.fb.group({
       username: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(8)]],
       email: ['', [Validators.required, Validators.email]],
@@ -47,6 +48,8 @@ export class CreateUserComponent {
   }
 
   createUser(form:ListUser){
+    this.verifiedUsername = false;
+    this.verfifiedPassword = false;
     //Verificacion Username no repetido desde el front
     const username = this.formUser.get('username')?.value;
     console.log(username)
@@ -57,36 +60,21 @@ export class CreateUserComponent {
     //Verificacion Password iguales
     const password = this.formUser.get('password')?.value;
     const confirmPassword = this.formUser.get('passwordConfirm')?.value;
-    if(password === confirmPassword){
-      this.verfifiedPassword= true;
-    }else{
-      this.verfifiedPassword=false;
-    }
-
-    console.log(password, confirmPassword)
-
+    if(password === confirmPassword) this.verfifiedPassword = true;
     
-    if(this.formUser.valid && !this.verifiedUsername && this.verfifiedPassword){
-      this.api.createUser(form).subscribe(data => {
-        console.log(data);
-        this.router.navigate(['/home']);
-        this.formUser.reset();
-      });
-    }else{
-      console.log('Formulario invalido o Usario ya existe o Contrasena no coincide');
-      this.verifiedUsername = false;
-      this.verfifiedPassword = false;
-    }
-  }
 
-  validatePassword(){
-    const password = this.formUser.get('password')?.value;
-    const confirmPassword = this.formUser.get('confirmPassword')?.value;
-    if(password === confirmPassword){
-      return true;
-    }else{
-      return false;
-    }
+    if(!this.formUser.valid) return this.alerta.showError("Error, digite correctamente los campos", "Creacion Incorrecta");
+
+    if(this.verifiedUsername) return this.alerta.showError("Error, el usuario ya existe", "Error Username");
+
+    if(!this.verfifiedPassword) return this.alerta.showError("Error, las contrasenas no coinciden", "Error Password");
+
+    this.api.createUser(form).subscribe(data => {
+      console.log(data);
+      this.router.navigate(['/home']);
+      this.formUser.reset();
+      this.alerta.showSuccess("Usuario creado correctamente", "Creacion Correcta");
+    });
   }
 
   salir(){
