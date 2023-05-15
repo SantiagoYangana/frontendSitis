@@ -17,7 +17,9 @@ export class HomeComponent {
   size:number=5;
   isfirst:boolean = false;
   isLast: boolean = false;
-  totalPages:Array<number>=[];
+  totalPages:Array<number>=[];  
+  pageCount:number=1;
+  totalPagesCount:number=0;
 
   users: ListUser[] = [];
   profiles: ProfileUser[] = [];
@@ -44,6 +46,7 @@ export class HomeComponent {
     this.api.getPaginationUsers(this.page, this.size).subscribe(data => {
       this.users = data.content;
       this.isfirst = data.first;
+      this.totalPagesCount = data.totalPages;
       this.isLast = data.last;
       this.totalPages = new Array(data['totalPages']);
       this.filteredUsers = this.users;
@@ -94,6 +97,7 @@ export class HomeComponent {
 
   setPage(page:number){
     this.page=page;
+    this.pageCount=page+1;
     this.chargePaginationUsers();
   }
 }

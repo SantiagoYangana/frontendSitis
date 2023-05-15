@@ -30,7 +30,7 @@
     </select>
   </div>
   <h4 *ngIf="showNullText">No hay datos para este perfil</h4>
-  <p-table [value]="filteredUsers" [tableStyle]="{ 'min-width': '50rem' }">
+  <p-table [value]="filteredUsers" [tableStyle]="{ 'min-width': '30rem' }">
     <ng-template pTemplate="header">
       <tr>
         <th>Usuario</th>
@@ -70,6 +70,9 @@
           styleClass="p-button-rounded p-button-text"
           (click)="nextPage()"
         ></p-button>
+        <span
+          ><p>Pagina: {{ pageCount + "/" + totalPagesCount }}</p></span
+        >
       </div>
     </ng-template>
   </p-table>
